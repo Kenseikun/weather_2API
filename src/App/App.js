@@ -4,11 +4,6 @@ import "./App.css";
 import SearchWeatherForm from "../components/SearchWeatherForm/SearchWeatherForm";
 import DisplayWeather from "../components/DisplayWeather/DisplayWeather";
 
-// const apiUrl =
-//   "http://api.openweathermap.org/data/2.5/weather?q=Warsaw&APPID=82539fc214fd5543bd4ccc83b18a89a1";
-
-// const coordinates = `http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid=${process.env.REACT_APP_API_KEY}`;
-
 class App extends Component {
   state = {
     humidity: null,
