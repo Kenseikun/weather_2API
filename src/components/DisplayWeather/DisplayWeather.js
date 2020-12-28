@@ -1,4 +1,5 @@
 import React from "react";
+import Spinner from "../../UI/Spinner/Spinner";
 
 // http://openweathermap.org/img/wn/10d@2x.png
 
@@ -8,12 +9,14 @@ const DisplayWeather = ({
   humidity,
   temp,
   pollution,
+  isLoading,
   error,
   handleTempDegreeSelect,
 }) => {
   return (
     <>
-      {temp ? (
+      {isLoading ? <Spinner /> : null}
+      {!isLoading && temp ? (
         <div>
           <p>{temp}&deg;C</p>
           <p>Carbon monoxide level: {pollution}</p>

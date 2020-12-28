@@ -16,6 +16,7 @@ class App extends Component {
       lat: null,
       lon: null,
     },
+    isLoading: null,
     error: "",
   };
 
@@ -42,19 +43,23 @@ class App extends Component {
         const { temp, humidity, pressure } = response.data.main;
         const { lat, lon } = response.data.coord;
         const celciusWeather = Math.round(temp - 273);
+        this.setState({ isLoading: true });
 
-        this.setState({
-          wind: response.data.wind,
-          weatherDescription: response.data.weather[0],
-          temp: celciusWeather,
-          pressure,
-          humidity,
-          weatherCoordinates: {
-            lat,
-            lon,
-          },
-          error: "",
-        });
+        setTimeout(() => {
+          this.setState((prevState) => ({
+            wind: response.data.wind,
+            weatherDescription: response.data.weather[0],
+            temp: celciusWeather,
+            pressure,
+            humidity,
+            weatherCoordinates: {
+              lat,
+              lon,
+            },
+            isLoading: false,
+            error: "",
+          }));
+        }, 2000);
       })
       .catch((error) => {
         console.log(error);
@@ -112,19 +117,17 @@ class App extends Component {
     // } = this.state;
     return (
       <>
-        <>
-          <SearchWeatherForm getWeather={this.getWeather} />
-          <DisplayWeather
-            {...this.state}
-            // temp={temp}
-            // humidity={humidity}
-            // pressure={pressure}
-            // error={error}
-            // weatherLoading={weatherLoading}
-            // weatherDescription={weatherDescription}
-            handleTempDegreeSelect={this.handleTempDegreeSelect}
-          />
-        </>
+        <SearchWeatherForm getWeather={this.getWeather} />
+        <DisplayWeather
+          {...this.state}
+          // temp={temp}
+          // humidity={humidity}
+          // pressure={pressure}
+          // error={error}
+          // weatherLoading={weatherLoading}
+          // weatherDescription={weatherDescription}
+          handleTempDegreeSelect={this.handleTempDegreeSelect}
+        />
       </>
     );
   }
